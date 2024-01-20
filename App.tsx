@@ -1,20 +1,29 @@
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Home } from '@/screen/home';
+import { useFonts } from 'expo-font';
+import {
+  Urbanist_700Bold,
+  Urbanist_400Regular,
+  Urbanist_800ExtraBold,
+} from "@expo-google-fonts/urbanist"
+import { Loading } from '@/components/loading';
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    Urbanist_700Bold,
+    Urbanist_400Regular,
+    Urbanist_800ExtraBold,
+  })
+
+  if (!fontsLoaded) {
+    return <Loading />
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <GestureHandlerRootView style={{ flex: 1}}>
+    <Home />
+    <StatusBar style='light' backgroundColor='transparent' translucent />
+    </GestureHandlerRootView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
